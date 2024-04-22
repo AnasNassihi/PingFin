@@ -121,3 +121,31 @@ nav a:hover {
     width: 100%; /* Neem de volledige breedte van het formulier in beslag */
 }
 
+/* Stijlen voor de tabel op de Transactions-pagina */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.receiverProfileTable {
+    display: flex;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #2ECC71;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
