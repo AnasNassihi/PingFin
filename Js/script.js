@@ -1,3 +1,26 @@
+// Helper functie om een response object te creëren
+function createResponseObject(response) {
+    return {
+        ok: response.ok,
+        status: response.status,
+        code: response.statusText,
+        message: response.message || null,
+        data: response.data || null
+    };
+}
+
+// Functie voor het opvragen van informatie via de API
+async function fetchInformation() {
+    const token = 'Bearer your_access_token_here';
+    const response = await fetch(' https://stevenop.be/pingfin/api/help/', {
+        headers: { 'Authorization': token }
+    });
+    if (!response.ok) {
+        throw new Error('Failed to fetch the data');
+    }
+    return response.json();
+}
+
 // Functie om het bank ID te controleren en resultaat weergeven
 async function ctrlID() {
     try {
