@@ -1,34 +1,123 @@
+/* Voeg nieuwe stijlen toe voor de tabel en algemeen ontwerp */
+
 body {
-    font-family: sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
 }
-  
+
 header {
-    background-color: #f0f0f0;
+    background-color: #4CAF50;
+    color: white;
     padding: 20px;
+    text-align: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
-  
+
+
+/* Voeg nieuwe stijlen toe voor de navigatie en algemeen ontwerp */
+
 nav {
-    background-color: #e0e0e0;
+    background-color: #2ECC71;
     padding: 10px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
-  
+
 nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-  
+
 nav li {
     display: inline-block;
     margin-right: 15px;
 }
-  
+
+nav table {
+    width: auto; /* Laat de tabel zich aanpassen aan de inhoud */
+    margin: 0 auto; /* Centreer de tabel */
+}
+
+nav td {
+    padding: 10px; /* Voeg wat padding toe aan de celinhoud */
+}
+
 nav a {
     text-decoration: none;
-    color: black;
+    color: #333;
+    font-weight: bold;
+    padding: 8px 16px; /* Voeg wat padding toe aan de links voor meer ruimte */
+    border: 2px solid transparent; /* Zorg ervoor dat de links een duidelijke rand hebben */
+    border-radius: 5px; /* Voeg wat afgeronde hoeken toe aan de links */
 }
-  
-main {
+
+nav a:hover {
+    background-color: #f2f2f2; /* Verander de achtergrondkleur wanneer er overheen wordt gehoverd */
+}
+
+
+/* Voeg stijlen toe om een kader rond de tabel te creÃ«ren */
+
+#content {
+    flex-wrap: wrap; /* Laat de inhoudselementen zichzelf automatisch op meerdere rijen plaatsen */
+    justify-content: space-between; /* Verdeel de ruimte tussen de elementen */
+    margin: 20px auto;
+    max-width: 800px; /* Om de tabel niet te breed te laten worden op grotere schermen */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
     padding: 20px;
+}
+
+/* Voeg stijlen toe om de tabelkoppen verticaal onder elkaar te plaatsen binnen de sectie met id "content" */
+
+#content table {
+    flex-basis: calc(33.33% - 20px); /* Zorg ervoor dat elke tabel 33.33% van de beschikbare ruimte inneemt */
+    border-collapse: collapse;
+}
+
+#content th, #content td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#content th {
+    background-color: #f2f2f2;
+    color: #333;
+    white-space: nowrap; /* Voorkom dat de inhoud van de th op meerdere regels wordt weergegeven */
+}
+
+#content th:first-child,
+#content td:first-child {
+    white-space: normal; /* Zorg ervoor dat de inhoud van de eerste cel van elke rij wel op meerdere regels kan worden weergegeven */
+}
+
+#content th,
+#content td {
+    display: block; /* Zet de th en td om in blokelementen, zodat ze onder elkaar worden weergegeven */
+    width: 100%; /* Zorg ervoor dat elke cel de volledige breedte inneemt */
+}
+
+/* Voeg stijlen toe om de invoervelden onder elkaar te plaatsen binnen het formulier voor het laden van een nieuwe betaling */
+
+#content form label {
+    display: block; /* Zet de labels om in blokelementen, zodat ze onder elkaar worden weergegeven */
+    margin-bottom: 5px; /* Voeg wat ruimte toe tussen elk label */
+}
+
+#content form input,
+#content form textarea {
+    width: calc(100% - 20px); /* Neem de volledige breedte van het formulier in beslag, met wat speling voor de randen */
+    margin-bottom: 15px; /* Voeg wat ruimte toe tussen elk invoerveld */
+}
+
+#content form button {
+    display: block; /* Zet de knop om in een blokelement, zodat deze onderaan het formulier wordt weergegeven */
+    width: 100%; /* Neem de volledige breedte van het formulier in beslag */
 }
 
