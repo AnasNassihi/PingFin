@@ -1,4 +1,4 @@
-const mysql = require('msql');
+const mysql = require('mysql');
 
 const connection = mysql.createConnection({
     host: "ID416124_databaseBank.db.webhosting.be",
@@ -20,8 +20,27 @@ function getAllBanks(callback){
 
 function poIn(po){    
     $query = 'insert into PO_in (po_id,po_amount,po_message,po_datetime,ob_id,oa_id,ob_code,ob_datetime,cb_code,cb_datetime,bb_id,ba_id,bb_code,bb_datetime) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
-    connection.query($query, [po.data[0].po_id,po.data[0].po_amount,po.data[0].po_message])
-    po.data[0].
+    connection.query($query, 
+        [po.data[0].po_id,
+        po.data[0].po_amount,
+        po.data[0].po_message,
+        po.data[0].po_datetime,
+        po.data[0].ob_id,
+        po.data[0].oa_id,
+        po.data[0].ob_code,
+        po.data[0].ob_datetime,
+        po.data[0].cb_code,
+        po.data[0].cb_datetime,
+        po.data[0].bb_id,
+        po.data[0].ba_id,
+        po.data[0].bb_code,
+        po.data[0].bb_datetime
+    ], (err, result)=>{
+        if(err){
+            console.log(err);            
+        }
+        
+    });    
 }
 
 function poOut(){
