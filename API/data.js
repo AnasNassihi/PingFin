@@ -37,9 +37,8 @@ function poIn(po){
         po.data[0].bb_datetime
     ], (err, result)=>{
         if(err){
-            console.log(err);            
+            console.log(err);
         }
-        
     });    
 }
 
