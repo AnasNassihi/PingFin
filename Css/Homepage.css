@@ -1,161 +1,90 @@
-/* Voeg nieuwe stijlen toe voor de tabel en algemeen ontwerp */
-
-
-main {
-    background-image: url(../image/picture_PingFin.avif);
-}
-
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+    color: #0c0c0c;
+    background-color: #ffffff;
     margin: 0;
+    padding: 0;
 }
 
 header {
-    background-color: #4CAF50;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.35));
     color: white;
     padding: 20px;
     text-align: center;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
 
 nav {
-    background-color: #2ECC71;
-    padding: 10px;
+    background-color: #1c1c1c;
     text-align: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    padding: 15px 0;
 }
 
 nav ul {
     list-style: none;
-    margin: 0;
     padding: 0;
 }
 
 nav li {
     display: inline-block;
-    margin-right: 15px;
+    margin: 0 10px;
 }
 
 nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    color: #ffffff;
     padding: 8px 16px;
-    border: 2px solid transparent;
-    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
 }
 
 nav a:hover {
-    background-color: #f2f2f2;
+    background-color: #f1db25;
+    color: #0c0c0c;
 }
 
-/* Voeg stijlen toe voor de sectie met id "content" */
-
+/* Container voor de transactiekaders */
 #content {
-    display:flex;
-    flex-wrap: wrap; /* Laat de inhoudselementen zichzelf automatisch op meerdere rijen plaatsen */
-    justify-content: space-between; /* Verdeel de ruimte tussen de elementen */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 20px auto;
-    max-width: 800px; /* Om de tabel niet te breed te laten worden op grotere schermen */
+    max-width: 800px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
 }
 
-#content_transactie {
-    justify-content: space-between; /* Verdeel de ruimte tussen de elementen */
-    margin: 20px auto;
-    max-width: 800px; /* Om de tabel niet te breed te laten worden op grotere schermen */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+/* Transactiekaders naast elkaar */
+#content .transactie-box {
+    flex: 1 1 calc(33.33% - 20px); /* Drie kaders per rij met margin */
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
     border-radius: 10px;
-    padding: 20px;
-}
-
-/* Voeg stijlen toe om de tabelkoppen verticaal onder elkaar te plaatsen binnen de sectie met id "content" */
-
-#content table {
-    flex-basis: calc(33.33% - 20px); /* Zorg ervoor dat elke tabel 33.33% van de beschikbare ruimte inneemt */
-    border-collapse: collapse;
-}
-
-#content th, #content td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-#content th {
-    background-color: #f2f2f2;
-    color: #333;
-    white-space: nowrap; /* Voorkom dat de inhoud van de th op meerdere regels wordt weergegeven */
-}
-
-#content th:first-child,
-#content td:first-child {
-    white-space: normal; /* Zorg ervoor dat de inhoud van de eerste cel van elke rij wel op meerdere regels kan worden weergegeven */
-}
-
-#content th,
-#content td {
-    display: block; /* Zet de th en td om in blokelementen, zodat ze onder elkaar worden weergegeven */
-    width: 100%; /* Zorg ervoor dat elke cel de volledige breedte inneemt */
-}
-
-/* Voeg stijlen toe om de invoervelden onder elkaar te plaatsen binnen het formulier voor het laden van een nieuwe betaling */
-
-#content form label {
-    display: block; /* Zet de labels om in blokelementen, zodat ze onder elkaar worden weergegeven */
-    margin-bottom: 5px; /* Voeg wat ruimte toe tussen elk label */
-}
-
-#content form input,
-#content form textarea {
-    width: calc(100% - 20px); /* Neem de volledige breedte van het formulier in beslag, met wat speling voor de randen */
-    margin-bottom: 15px; /* Voeg wat ruimte toe tussen elk invoerveld */
-}
-
-#content form button {
-    display: block; /* Zet de knop om in een blokelement, zodat deze onderaan het formulier wordt weergegeven */
-    width: 100%; /* Neem de volledige breedte van het formulier in beslag */
-}
-
-/* Stijlen voor de tabel op de Transactions-pagina */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-}
-
-th {
-    background-color: #2ECC71;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+    padding: 15px;
 }
 
 footer {
-    background-color: #000;
-    color: #fff;
+    background-color: #101010;
+    color: rgba(254, 254, 255, 0.7);
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 35px;
+    background-color: #f1db25;
+    color: #ffffff;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+}
+
+.button:hover {
+    background-color: transparent;
+    border-color: #f1db25;
+    color: #f1db25;
 }
