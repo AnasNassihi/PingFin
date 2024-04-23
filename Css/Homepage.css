@@ -15,9 +15,6 @@ header {
     border-bottom-right-radius: 10px;
 }
 
-
-/* Voeg nieuwe stijlen toe voor de navigatie en algemeen ontwerp */
-
 nav {
     background-color: #2ECC71;
     padding: 10px;
@@ -37,30 +34,20 @@ nav li {
     margin-right: 15px;
 }
 
-nav table {
-    width: auto; /* Laat de tabel zich aanpassen aan de inhoud */
-    margin: 0 auto; /* Centreer de tabel */
-}
-
-nav td {
-    padding: 10px; /* Voeg wat padding toe aan de celinhoud */
-}
-
 nav a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    padding: 8px 16px; /* Voeg wat padding toe aan de links voor meer ruimte */
-    border: 2px solid transparent; /* Zorg ervoor dat de links een duidelijke rand hebben */
-    border-radius: 5px; /* Voeg wat afgeronde hoeken toe aan de links */
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    border-radius: 5px;
 }
 
 nav a:hover {
-    background-color: #f2f2f2; /* Verander de achtergrondkleur wanneer er overheen wordt gehoverd */
+    background-color: #f2f2f2;
 }
 
-
-/* Voeg stijlen toe om een kader rond de tabel te creÃ«ren */
+/* Voeg stijlen toe voor de sectie met id "content" */
 
 #content {
     flex-wrap: wrap; /* Laat de inhoudselementen zichzelf automatisch op meerdere rijen plaatsen */
@@ -132,10 +119,6 @@ table {
     background-color: #fff;
 }
 
-.receiverProfileTable {
-    display: flex;
-}
-
 th, td {
     padding: 12px 15px;
     text-align: left;
@@ -148,4 +131,15 @@ th {
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }

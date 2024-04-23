@@ -1,3 +1,4 @@
+
 // Helper functie om een response object te creëren
 function createResponseObject(response) {
     return {

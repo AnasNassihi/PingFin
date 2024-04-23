@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/Homepage.css">
+    <title>SEPA Transaction Management System</title>
+</head>
+
+<body>
+    <header>
+        <h1>SEPA Transaction Management</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="HomePage.html" id="dashboardLink">Dashboard</a></li>
+            <li><a href="transactie.html" id="transactionsLink">Transactions</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="content">
+            <table id="createResponseObject">
+                <caption>Create Response Object</caption>
+                <tr>
+                    <th>OK</th>
+                    <th>Status</th>
+                    <th>Code</th>
+                    <th>Message</th>
+                    <th>Data</th>
+                </tr>
+                <!-- Voeg hier de gegevens van het createResponseObject toe -->
+            </table>
+            <table id="ctrlID">
+                <caption>Control ID</caption>
+                <tr>
+                    <th>Bank ID</th>
+                    <th>Exists</th>
+                </tr>
+                <!-- Voeg hier de gegevens van het ctrlID toe -->
+            </table>
+            <table id="checkBankIDInDatabase">
+                <caption>Check Bank ID in Database</caption>
+                <tr>
+                    <th>Bank ID</th>
+                </tr>
+                <!-- Voeg hier de gegevens van het checkBankIDInDatabase toe -->
+            </table>
+            <table id="ctrlAmount">
+                <caption>Control Amount</caption>
+                <tr>
+                    <th>Amount</th>
+                </tr>
+                <!-- Voeg hier de gegevens van het ctrlAmount toe -->
+            </table>
+            <table id="sendRequest">
+                <caption>Send Request</caption>
+                <tr>
+                    <th>OK</th>
+                    <th>Status</th>
+                    <th>Code</th>
+                    <th>Message</th>
+                    <th>Data</th>
+                </tr>
+                <!-- Voeg hier de gegevens van het sendRequest toe -->
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 SEPA Transaction Management System</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
