@@ -1,5 +1,10 @@
 /* Voeg nieuwe stijlen toe voor de tabel en algemeen ontwerp */
 
+
+main {
+    background-image: url(../image/picture_PingFin.avif);
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
