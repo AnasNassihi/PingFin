@@ -50,7 +50,18 @@ nav a:hover {
 /* Voeg stijlen toe voor de sectie met id "content" */
 
 #content {
+    display:flex;
     flex-wrap: wrap; /* Laat de inhoudselementen zichzelf automatisch op meerdere rijen plaatsen */
+    justify-content: space-between; /* Verdeel de ruimte tussen de elementen */
+    margin: 20px auto;
+    max-width: 800px; /* Om de tabel niet te breed te laten worden op grotere schermen */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#content_transactie {
     justify-content: space-between; /* Verdeel de ruimte tussen de elementen */
     margin: 20px auto;
     max-width: 800px; /* Om de tabel niet te breed te laten worden op grotere schermen */
