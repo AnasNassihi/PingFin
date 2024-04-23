@@ -1,91 +1,57 @@
-body {
-    
-    color: #0c0c0c;
-    background-color: #ffffff;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.35));
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-nav {
-    background-color: #1c1c1c;
-    text-align: center;
-    padding: 15px 0;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-nav a {
-    color: #ffffff;
-    padding: 8px 16px;
-    text-transform: uppercase;
-    transition: background-color 0.3s;
-}
-
-nav a:hover {
-    background-color: #f1db25;
-    color: #0c0c0c;
-}
-
-/* Container voor de transactiekaders */
 #content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-/* Transactiekaders naast elkaar */
-#content .transactie-box {
-    flex: 1 1 calc(33.33% - 20px); /* Drie kaders per rij met margin */
+  }
+  
+  .informations {
+    flex: 1 1 calc(33.33% - 20px);
     margin: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 15px;
-}
-
-footer {
-    background-color: #101010;
-    color: rgba(254, 254, 255, 0.7);
-    text-align: center;
-    padding: 20px;
-    position: fixed;
-    bottom: 0;
+  }
+  
+  table {
     width: 100%;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 35px;
-    background-color: #f1db25;
-    color: #ffffff;
-    transition: all 0.3s;
-    border: 1px solid transparent;
-    text-transform: uppercase;
-}
-
-.button:hover {
-    background-color: transparent;
-    border-color: #f1db25;
-    color: #f1db25;
-}
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+  }
+  
+  caption {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th:first-child {
+    border-right: none;
+  }
+  
+  th:last-child {
+    border-left: none;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #ddd;
+  }
+  
+  tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
