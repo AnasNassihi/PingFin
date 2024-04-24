@@ -1,0 +1,186 @@
+const express = require('express');
+//const data = require('./db');
+const router = express.Router();
+
+const mysql = require('mysql2');
+
+const connection = mysql.createConnection({
+    host: "ID416124_databaseBank.db.webhosting.be",
+    user: "ID416124_databaseBank",
+    password: "groep8bank",
+    database: "ID416124_databaseBank"
+})
+
+// datetime format 
+function getCurrentDateTime() {
+    const now = new Date();
+
+    // Get individual date and time components
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Adding leading zero if needed
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+function insertPOToDb(tabel, po){
+    query1 = `insert into ${tabel} (po_id,po_amount,po_message,po_datetime,ob_id,oa_id,ob_code,ob_datetime,cb_code,cb_datetime,bb_id,ba_id,bb_code,bb_datetime) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    const values = [
+        po.po_id, po.po_amount,
+        po.po_message, po.po_datetime,
+        po.ob_id, po.oa_id,
+        po.ob_code, po.ob_datetime,
+        po.cb_code, po.cb_datetime,
+        po.bb_id, po.ba_id,
+        po.bb_code, po.bb_datetime];   
+    
+        return [query1, values];
+}
+
+function makeLog(po,message,type){
+    query = `insert into CB_log (log_datetime,log_message,log_type,po_id,po_amount,po_message,po_datetime,ob_id,oa_id,ob_code,ob_datetime,cb_code,cb_datetime,bb_id,ba_id,bb_code,bb_datetime) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    const now = getCurrentDateTime();
+    const values = [
+        now,message,type,
+        po.po_id, po.po_amount,
+        po.po_message, po.po_datetime,
+        po.ob_id, po.oa_id,
+        po.ob_code, po.ob_datetime,
+        po.cb_code, po.cb_datetime,
+        po.bb_id, po.ba_id,
+        po.bb_code, po.bb_datetime];   
+    
+        return [query, values];
+}
+
+// bankInfo
+router.get('/info/:id', (req, res) => {
+    const id = req.params.id;
+    $query = "select * from CB_banks WHERE id = ?";
+    connection.query($query, [id], (error, result) => {
+        if (error) console.log(error);
+        //res.status(200).json(result.rows);
+        res.send(result);
+    });
+});
+
+// functie "getAllBanks()"
+router.get('/banks', (req, res) => {
+    $query = "select * from CB_banks";
+    connection.query($query, (error, result) => {
+        if (error) console.log(error);
+        //res.status(200).json(result.rows);
+        res.send(result);
+    });
+});
+
+// functie "poIN()"
+router.get('/po_in', (req, res) => {
+    $query = "select * from CB_po_in";
+    connection.query($query, (error, result) => {
+        if (error) console.log(error);
+        //res.status(200).json(result.rows);
+        res.send(result);
+    });
+});
+
+router.post('/po_in', (required, response) => {
+    const pos = required.body;    
+    pos.data.forEach(po => {
+        let [query, values1] = makeLog(po,"Payment order received", "po_in");
+        connection.query(query, values1);
+
+        [query, values1] = insertPOToDb('CB_po_in', po);
+        
+        connection.query(query, values1, (err, result) => {
+            if (err) {
+                console.log(err);
+                
+            }
+            //console.log(result);
+
+            po.cb_code = 2000;
+            po.cb_datetime = getCurrentDateTime();
+
+            //update cb_code en cb_datetime
+            $updateQuery = 'UPDATE CB_po_in SET cb_code = ?, cb_datetime = ? WHERE po_id = ?';
+            connection.query($updateQuery, [po.cb_code, po.cb_datetime,po.po_id]);
+
+            [query, values1] = insertPOToDb('CB_po_out', po);
+            connection.query(query, values1);
+            
+            let [logQuery, logValues] = makeLog(po,"Payment order accepted (po_in -> po_out)", "po_out");
+            connection.query(logQuery, logValues);
+
+            response.send(result);
+        });
+    });
+});
+
+// po_out
+router.get('/po_out', (req, res) => {
+    $query = "SELECT * FROM CB_po_out";
+    connection.query($query, (error, result) => {
+        if (error) console.log(error);
+        //res.status(200).json(result.rows);
+        res.send(result);
+    });
+});
+
+// ack_in
+router.post('/ack_in', (required, response) => {
+    const pos = required.body;    
+    pos.data.forEach(po => {
+        let [query, values1] = makeLog(po,"Payment order response received", "ack_in");
+        connection.query(query, values1);
+        
+        [query, values1] = insertPOToDb('CB_ack_in', po);
+        
+        connection.query(query, values1, (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            //console.log(result);
+
+            po.cb_code = 2000;
+            po.cb_datetime = getCurrentDateTime();
+
+            //update cb_code en cb_datetime
+            $updateQuery = 'UPDATE CB_ack_in SET cb_code = ?, cb_datetime = ? WHERE po_id = ?',
+                connection.query($updateQuery, [po.cb_code, po.cb_datetime,po.po_id]);
+
+            [query, values1] = insertPOToDb('CB_ack_out', po);
+            connection.query(query, values1);
+
+            let [logQuery, logValues] = makeLog(po,"Payment response ack_in -> ack_out", "ack_out");
+            connection.query(logQuery, logValues);
+            
+            response.send(result);
+        });
+    });
+});
+
+//ack_out
+router.get('/ack_out', (req, res) => {    
+    $query = "SELECT * FROM CB_ack_out";
+    connection.query($query, (error, result) => {
+        if (error) console.log(error);
+        //res.status(200).json(result.rows);
+        res.send(result);
+    });
+});
+
+// test logs
+router.get('/logs', (req, res) => {
+    $query = "SELECT * FROM CB_log";
+    connection.query($query, (error, result) => {
+        if (error) console.log(error);
+        //res.status(200).json(result.rows);
+        res.send(result);
+    });
+})
+
+module.exports = router;
