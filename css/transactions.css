@@ -1,23 +1,19 @@
 /* Resetten van standaardmarges en -paddings */
-body, h1, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
-h2{
-	padding-bottom: 10px;
-}
-/* Basisstijl voor de hele pagina */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9; 
-    color: #333;
+body, h1, h2, p, ul, li {
     margin: 0;
     padding: 0;
 }
 
+/* Basisstijl voor de hele pagina */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9; /* Lichtgrijze achtergrond */
+    color: #333;
+}
+
 /* Header stijl */
 header {
-    background-color: #004a8f; 
+    background-color: #004a8f; /* Donkerblauwe header */
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -35,16 +31,55 @@ header h1 a {
 
 header h2 {
     font-size: 18px;
-    margin-bottom: 20px;
 }
+
 
 /* Main stijl */
 main {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    
 }
 
+#dashboardLink {
+    text-align: right;
+}
+
+.buttons {
+    list-style-type: none;
+    text-align: center; /* Center align de inhoud */
+}
+
+.buttons li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.buttons li a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #004a8f; /* Donkerblauwe knopkleur */
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    
+}
+
+.buttons li a:hover {
+    background-color: #00264d; /* Donkerder blauw bij hover */
+}
+
+.buttons li:last-child {
+    margin-right: 0; /* Verwijder margin rechts van de laatste knop */
+}
+
+/* Stel de wrapper in om de volledige breedte in te nemen */
+.main-content {
+    width: 100%;
+    text-align: center; /* Center align de inhoud */
+}
 /* Stijl voor transactie-informatie */
 .transaction-info {
     background-color: #fff;
