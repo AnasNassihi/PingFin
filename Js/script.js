@@ -174,19 +174,6 @@ zal maken en die vullen met het gepullde informatie uit het api. Andere verschil
 api cruciaal is, het volgorde van de th's in het tabel en het volgorde van het opgehaalde informatie uit het api moeten perfect
 overeenkomen anders zullen ze niet in het juiste volgorde zijn in het tabel.
 */
-async function fetchDataAndUpdate() {
-    try {
-        const apiUrl = '/api/transaction-data'; // Example API endpoint
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error('API request failed');
-        }
-        const data = await response.json();
-        addRowToTable(data);
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
-}
 
 function addRowToTable(data) {
     const tableBody = document.getElementById('transaction-table-body');
@@ -200,6 +187,20 @@ function addRowToTable(data) {
     });
 
     tableBody.appendChild(newRow);
+}
+
+async function fetchDataAndUpdate() {
+    try {
+        const apiUrl = 'https://pingfin.onrender.com/api/logs'; // Example API endpoint
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API request failed');
+        }
+        const data = await response.json();
+        addRowToTable(data);
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
 }
 
 fetchDataAndUpdate(); // Fetch data from API and update table on page load
