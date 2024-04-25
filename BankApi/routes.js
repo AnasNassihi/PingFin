@@ -15,6 +15,8 @@ app.get("/", (req, res) => {
     res.send('Hello');
 })
 
+app.use('/api', router);
+
 // databank connection
 const mysql = require('mysql2');
 
