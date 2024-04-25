@@ -356,7 +356,7 @@ router.get('/logs', (req, res) => {
         //res.status(200).json(result.rows);
         res.send(result);
     });
-})
+});
 
 // was server.js
 app.listen(port, () => console.log(`app listening on port ${port}`));
