@@ -1,55 +1,169 @@
-// Helper functie om een response object te creëren
-function createResponseObject(response) {
-    return {
-        // afhangend van de namen in de api
-        ok: response.ok,
-        status: response.status,
-        code: response.statusText,
-        message: response.message || null,
-        data: response.data || null
-    };
-}
-
-// Functie voor het opvragen van informatie via de API
-async function fetchInformation() {
-    const token = 'Bearer your_access_token_here';
-    const response = await fetch('https://stevenop.be/pingfin/api/help/', {
-        headers: { 'Authorization': token }
-    });
-    if (!response.ok) {
-        const errorMessage = await response.text(); // Haal de foutmelding op van de response
-        throw new Error(errorMessage);
-    }
-    return response.json();
-}
-
-// Simulatie of een bankID bestaat in de database
-function checkBankIDInDatabase(bankID) {
-    const validBankIDs = ['BIC12345', 'BIC67890'];
-    return validBankIDs.includes(bankID);
-}
-
-// Functie voor het verzenden van POST en GET verzoeken
-async function sendRequest(url, method, data) {
-    const requestOptions = {
-        headers: new Headers({
-            'Authorization': 'Bearer your_access_token_here',
-            'Content-Type': 'application/json'
-        }),
-        method: method,
-        body: method === 'POST' ? JSON.stringify({ data: data }) : null
-    };
-
+async function fetchDataForTransactionID() {
     try {
-        const response = await fetch(url, requestOptions);
-        const jsonResponse = await response.json();
-        const responseObj = createResponseObject(jsonResponse);
-        document.getElementById('sendRequest').innerText = 'Request sent: ' + JSON.stringify(responseObj);
-        return responseObj;
+        const apiUrl = '/api/Transaction ID';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor Transaction ID');
+        }
+        const data = await response.json();
+        const transactionIDValue = data['Transaction ID'];
+        const transactionIDCell = ("transactie 1");
+        transactionIDCell.textContent = transactionIDValue;
+        document.getElementById('transaction-id').textContent = transactionIDValue;
     } catch (error) {
-        console.error(`Failed to send ${method} request:, error`);
-        document.getElementById('sendRequest').innerText = 'Failed to send request: ' + error.message;
-        throw error;
+        console.error('Er is een fout opgetreden:', error);
     }
 }
 
+async function fetchDataForLogID() {
+    try {
+        const apiUrl = '/api/Log ID';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor Log ID');
+        }
+        const data = await response.json();
+        const logIDValue = data['Log ID'];
+        const logIDCell = document.querySelector('.transaction-value[data-label="Log ID"]');
+        logIDCell.textContent = logIDValue;
+        document.getElementById('log-id').textContent = logIDValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}
+
+async function fetchDataForDatetime() {
+    try {
+        const apiUrl = '/api/Datetime';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor Datetime');
+        }
+        const data = await response.json();
+        const datetimeValue = data['Datetime'];
+        const datetimeCell = document.querySelector('.transaction-value[data-label="Datetime"]');
+        datetimeCell.textContent = datetimeValue;
+        document.getElementById('datetime').textContent = datetimeValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}
+
+async function fetchDataForMessage() {
+    try {
+        const apiUrl = '/api/Message';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor Message');
+        }
+        const data = await response.json();
+        const MessageValue = data['Message'];
+        const MessageCell = document.querySelector('.transaction-value[data-label="Message"]');
+        MessageCell.textContent = MessageValue;
+        document.getElementById('message').textContent = MessageValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}
+
+async function fetchDataForCb_code() {
+    try {
+        const apiUrl = '/api/cb_code';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor cb_code');
+        }
+        const data = await response.json();
+        const cb_codeValue = data['cb_code'];
+        const cb_codeCell = document.querySelector('.transaction-value[data-label="cb_code"]');
+        cb_codeCell.textContent = cb_codeValue;
+        document.getElementById('cb-code').textContent = cb_codeValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}
+
+async function fetchDataForOb_id() {
+    try {
+        const apiUrl = '/api/ob_id';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor ob_id');
+        }
+        const data = await response.json();
+        const ob_idValue = data['ob_id'];
+        const ob_idCell = document.querySelector('.transaction-value[data-label="ob_id"]');
+        ob_idCell.textContent = ob_idValue;
+        document.getElementById('ob-id').textContent = ob_idValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}
+
+async function fetchDataForOa_id() {
+    try {
+        const apiUrl = '/api/oa_id';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor oa_id');
+        }
+        const data = await response.json();
+        const oa_idValue = data['oa_id'];
+        const oa_idCell = document.querySelector('.transaction-value[data-label="oa_id"]');
+        oa_idCell.textContent = oa_idValue;
+        document.getElementById('oa-id').textContent = oa_idValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}
+
+async function fetchDataForBb_id() {
+    try {
+        const apiUrl = '/api/bb_id';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor bb_id');
+        }
+        const data = await response.json();
+        const bb_idValue = data['bb_id'];
+        const bb_idCell = document.querySelector('.transaction-value[data-label="bb_id"]');
+        bb_idCell.textContent = bb_idValue;
+        document.getElementById('bb-id').textContent = bb_idValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}
+
+async function fetchDataForBa_id() {
+    try {
+        const apiUrl = '/api/ba_id';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor ba_id');
+        }
+        const data = await response.json();
+        const ba_idValue = data['ba_id'];
+        const ba_idCell = document.querySelector('.transaction-value[data-label="ba_id"]');
+        ba_idCell.textContent = ba_idValue;
+        document.getElementById('ba-id').textContent = ba_idValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}
+
+async function fetchDataForBb_code() {
+    try {
+        const apiUrl = '/api/bb_code';
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API-verzoek mislukt voor bb_code');
+        }
+        const data = await response.json();
+        const bb_codeValue = data['bb_code'];
+        const bb_codeCell = document.querySelector('.transaction-value[data-label="bb_code"]');
+        bb_codeCell.textContent = bb_codeValue;
+        document.getElementById('bb-code').textContent = bb_codeValue;
+    } catch (error) {
+        console.error('Er is een fout opgetreden:', error);
+    }
+}

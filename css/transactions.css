@@ -89,17 +89,23 @@ main {
     margin-bottom: 20px;
 }
 
-.transaction-item {
-    margin-bottom: 10px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
-.transaction-label {
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    width: calc(100% / 14);
+    font-size: 14px;
+}
+
+th {
+    background-color: #f2f2f2;
     font-weight: bold;
-    color: #004a8f; 
-}
-
-.transaction-value {
-    margin-left: 10px;
 }
 
 /* Footer stijl */
