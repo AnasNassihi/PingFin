@@ -7,19 +7,49 @@ const connection = mysql.createConnection({
     database: "ID416124_databaseBank"
 })
 
+/*connection.query('Delete from CB_log', (err, res) => {
+    if (err) {
+        //res.status(500).json({ error: 'Internal server error' });
+        console.log(err);
+        return;
+    }
+    console.log(res);                
+});*/
+
+/*function checkBank(callback){
+    connection.query('select count(*) as a from CB_banks WHERE id = ?', ["2"], (err, res) => {
+        if (err) {
+            //res.status(500).json({ error: 'Internal server error' });
+            console.log(err);
+            return;
+        }
+        callback(res[0].a);                
+    });
+}
+let stuff ='';
+checkBank((result)=>{
+    stuff = result
+    console.log(stuff);
+})
+console.log(stuff);*/
+
+
+//const result1 = checkBank();
+//console.log(result1);
+
 /*$query = "select * from CB_banks";
     connection.query($query, (error, result)=>{
         if(error) console.log(error);
         //res.status(200).json(result.rows);
         console.log(result);
-    });*/
+    });
 
     $query = "select * from CB_po_out ";
     connection.query($query, (error, result)=>{
         if(error) console.log(error);
         //res.status(200).json(result.rows);
         console.log(result);
-    });
+    });*/
 
 /*function getAllBanks (req, res) {
     $query = "select * from CB_banks";

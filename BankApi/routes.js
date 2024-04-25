@@ -1,7 +1,21 @@
 const express = require('express');
+const makeToken = require('jsonwebtoken');
 //const data = require('./db');
 const router = express.Router();
 
+// was server.js
+const app = express();
+const port = 3001;
+
+//const routes = require('./routes');
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+    res.send('Hello');
+})
+
+// databank connection
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
@@ -63,12 +77,26 @@ function makeLog(po, message, type) {
     return [query, values];
 }
 
-function getBanks(){
-    connection.query("select * from CB_banks WHERE id=?", (error, result) => {
-        if (error) console.log(error);                    
-        return result;
-    });                   
+function checkBank(po, callback){
+    connection.query('select count(*) as a from CB_banks WHERE id = ?', [po.bb_id], (err, res) => {
+        if (err) {
+            res.status(500).json({ error: 'Internal server error' });
+            return;
+        }
+        callback(res[0].a);                
+    });
 }
+
+//token maken
+router.post('/token', async (req,res)=>{
+    const bankData = req.body.bankData;
+    const bic = '';
+    const secret_key = '';
+
+    if(bic === bankData.bic && secret_key === bankData.secret_key){
+        const token = makeToken.sign({bic: bic, role: ''})
+    }
+});
 
 // bankInfo
 router.get('/info/:id', (req, res) => {
@@ -115,6 +143,39 @@ router.post('/po_in', (required, response) => {
             }
 
             // validatie op internal transaction
+            // 4004  
+            //const bankCheck = checkBank(po);
+            let match = ''; 
+            checkBank(po, (data)=>{
+                match = data;
+                //console.log(match);                                            
+            });
+            /*
+            if (match == 0) {
+                console.log('test1');
+                po.cb_code = 4004;
+                po.cb_datetime = getCurrentDateTime();
+                console.log('test2');
+                [query, values1] = updateData('CB_po_in', po);
+                connection.query(query, values1);
+                console.log('test3');
+                [query, values1] = insertPOToDb('CB_ack_out', po);
+                connection.query(query, values1);
+                console.log('test4');
+
+                response.status(200).json({
+                    ok: true, // true or false (succes/fail)
+                    status: 200, // HTTP status code, e.g. 200 = ok, 404 = not found, 500 = server error...
+                    code: po.cb_code, // message or error code; null/undefined if none
+                    message: "bb_id does not exist in the CB system", // detailed message from API; null/undefined if none
+                    data: null // array of PO objects or null/undefined if none
+                });
+                return;
+            }
+            else{
+                console.log('test wrong');
+            }*/   
+
             if (po.bb_id === po.ob_id) {
                 po.cb_code = 4001;
                 po.cb_datetime = getCurrentDateTime();
@@ -168,19 +229,7 @@ router.post('/po_in', (required, response) => {
                     data: null // array of PO objects or null/undefined if none
                 });
                 return;
-            }
-            
-
-            if (po.po_amount > 500) {
-                po.cb_code = 4004;
-                po.cb_datetime = getCurrentDateTime();
-
-                [query, values1] = updateData('CB_po_in', po);
-                connection.query(query, values1);
-                [query, values1] = insertPOToDb('CB_ack_out', po);
-                connection.query(query, values1);
-                //break;
-            }
+            }                    
 
             //console.log(result);
 
@@ -278,3 +327,6 @@ router.get('/logs', (req, res) => {
 })
 
 module.exports = router;
+
+// was server.js
+app.listen(port, () => console.log(`app listening on port ${port}`));
