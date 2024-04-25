@@ -167,3 +167,42 @@ async function fetchDataForBb_code() {
         console.error('Er is een fout opgetreden:', error);
     }
 }
+
+
+
+/*
+Een verkorte versie waarin in plaats van cel per cel in het tabel een gegeven te pullen uit het api het programma een nieuwe rij
+zal maken en die vullen met het gepullde informatie uit het api. Andere verschil is dat het volgorde van gepulde informatie uit het
+api cruciaal is, het volgorde van de th's in het tabel en het volgorde van het opgehaalde informatie uit het api moeten perfect
+overeenkomen anders zullen ze niet in het juiste volgorde zijn in het tabel.
+*/
+async function fetchDataAndUpdate() {
+    try {
+        const apiUrl = '/api/transaction-data'; // Example API endpoint
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error('API request failed');
+        }
+        const data = await response.json();
+        addRowToTable(data);
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
+}
+
+function addRowToTable(data) {
+    const tableBody = document.getElementById('transaction-table-body');
+    const newRow = document.createElement('tr');
+
+    // Create and populate table cells with data from the API
+    Object.values(data).forEach(value => {
+        const newCell = document.createElement('td');
+        newCell.textContent = value;
+        newRow.appendChild(newCell);
+    });
+
+    tableBody.appendChild(newRow);
+}
+
+fetchDataAndUpdate(); // Fetch data from API and update table on page load
+
