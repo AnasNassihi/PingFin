@@ -11,21 +11,32 @@ const port = 3001;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.send('Hello');
-})
-
 app.use('/api', router);
 
 // databank connection
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
+
+// Establish connection to database
+const connection = mysql.createPool({
+    host: "ID416124_databaseBank.db.webhosting.be",
+    user: "ID416124_databaseBank",
+    password: "groep8bank",
+    database: "ID416124_databaseBank",
+    waitForConnections: true,
+    connectionLimit: 10,
+    maxIdle: 10,
+    idleTimeout: 600000,
+    queueLimit: 0
+});
+
+/*const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
     host: "ID416124_databaseBank.db.webhosting.be",
     user: "ID416124_databaseBank",
     password: "groep8bank",
     database: "ID416124_databaseBank"
-})
+})*/
 
 // datetime format 
 function getCurrentDateTime() {
@@ -92,43 +103,64 @@ function checkBank(po, callback){
 //token maken
 router.post('/token', async (req,res)=>{
     const bankData = req.body.bankData;
-    const bic = '';
-    const secret_key = '';
+    const bic = 'B4NK';
+    const secret_key = 'secret';
 
     if(bic === bankData.bic && secret_key === bankData.secret_key){
-        const token = makeToken.sign({bic: bic, role: ''})
+        const token = makeToken.sign({bic: bic, role: 'admin'}, 'mysecretkey', {expiresIn: '2h'});
+        res.send(token);
+        $query = 'insert into CB_token (bank_id, token, datetime) values (?,?,?)';
+        connection.query($query,[bic,token,getCurrentDateTime()]);
     }
+    console.log('invalid bank gegevens');
+
 });
 
 // bankInfo
-router.get('/info/:id', (req, res) => {
+router.get('/info/:id', async (req, res) => {
     const id = req.params.id;
     $query = "select * from CB_banks WHERE id = ?";
-    connection.query($query, [id], (error, result) => {
+    /*connection.query($query, [id], (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });
+    });*/
+    const conn = await connection.getConnection();
+
+    const [result, fields]= await conn.query($query,[id]);
+    conn.release();
+    res.send(result);
 });
 
 // functie "getAllBanks()"
-router.get('/banks', (req, res) => {
+router.get('/banks', async (req, res) => {
     $query = "select * from CB_banks";
-    connection.query($query, (error, result) => {
+    /*const [rows] = connection.query($query/, (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });
+    });*/
+    const conn = await connection.getConnection();
+
+    const [result, fields]= await conn.query($query);
+    conn.release();
+    res.send(result);
 });
 
 // functie "poIN()"
-router.get('/po_in', (req, res) => {
+router.get('/po_in', async(req, res) => {
     $query = "select * from CB_po_in";
-    connection.query($query, (error, result) => {
+    /*connection.query($query, (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });
+    });*/
+
+    const conn = await connection.getConnection();
+
+    const [result, fields]= await conn.query($query);
+    conn.release();
+    res.send(result);
 });
 
 router.post('/po_in', (required, response) => {
@@ -264,13 +296,19 @@ router.post('/po_in', (required, response) => {
 });
 
 // po_out
-router.get('/po_out', (req, res) => {
+router.get('/po_out',async (req, res) => {
     $query = "SELECT * FROM CB_po_out";
-    connection.query($query, (error, result) => {
+    /*connection.query($query, (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });
+    });*/
+
+    const conn = await connection.getConnection();
+
+    const [result, fields]= await conn.query($query);
+    conn.release();
+    res.send(result);
 });
 
 // ack_in
@@ -309,13 +347,19 @@ router.post('/ack_in', (required, response) => {
 });
 
 //ack_out
-router.get('/ack_out', (req, res) => {
+router.get('/ack_out', async (req, res) => {
     $query = "SELECT * FROM CB_ack_out";
-    connection.query($query, (error, result) => {
+    /*connection.query($query, (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });
+    });*/
+
+    const conn = await connection.getConnection();
+
+    const [result, fields]= await conn.query($query);
+    conn.release();
+    res.send(result);
 });
 
 // test logs
@@ -327,8 +371,6 @@ router.get('/logs', (req, res) => {
         res.send(result);
     });
 })
-
-module.exports = router;
 
 // was server.js
 app.listen(port, () => console.log(`app listening on port ${port}`));
