@@ -1,4 +1,4 @@
-async function fetchDataForTransactionID() {
+/*async function fetchDataForTransactionID() {
     try {
         const apiUrl = '/api/Transaction ID';
         const response = await fetch(apiUrl);
@@ -167,9 +167,7 @@ async function fetchDataForBb_code() {
         console.error('Er is een fout opgetreden:', error);
     }
 }
-
-
-
+*/
 /*
 Een verkorte versie waarin in plaats van cel per cel in het tabel een gegeven te pullen uit het api het programma een nieuwe rij
 zal maken en die vullen met het gepullde informatie uit het api. Andere verschil is dat het volgorde van gepulde informatie uit het
