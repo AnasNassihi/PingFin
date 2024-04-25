@@ -14,7 +14,8 @@ app.use(express.json());
 app.use('/api', router);
 
 // databank connection
-const mysql = require('mysql2/promise');
+//const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
 // Establish connection to database
 const connection = mysql.createPool({
@@ -117,50 +118,47 @@ router.post('/token', async (req,res)=>{
 });
 
 // bankInfo
-router.get('/info/:id', async (req, res) => {
+router.get('/info/:id', (req, res) => {
     const id = req.params.id;
     $query = "select * from CB_banks WHERE id = ?";
-    /*connection.query($query, [id], (error, result) => {
+    connection.query($query, [id], (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });*/
-    const conn = await connection.getConnection();
-
-    const [result, fields]= await conn.query($query,[id]);
-    conn.release();
-    res.send(result);
+    });
 });
 
 // functie "getAllBanks()"
-router.get('/banks', async (req, res) => {
+router.get('/banks',  (req, res) => {
+    $query = "select * from CB_banks";
+    connection.query($query, (error, result) => {
+        if (error) console.log(error);
+        //res.status(200).json(result.rows);
+        res.send(result);
+    });
+});
+/*router.get('/banks', async (req, res) => {
     $query = "select * from CB_banks";
     /*const [rows] = connection.query($query/, (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });*/
+    });
     const conn = await connection.getConnection();
 
     const [result, fields]= await conn.query($query);
     conn.release();
     res.send(result);
-});
+});*/
 
 // functie "poIN()"
-router.get('/po_in', async(req, res) => {
+router.get('/po_in', (req, res) => {
     $query = "select * from CB_po_in";
-    /*connection.query($query, (error, result) => {
+    connection.query($query, (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });*/
-
-    const conn = await connection.getConnection();
-
-    const [result, fields]= await conn.query($query);
-    conn.release();
-    res.send(result);
+    });
 });
 
 router.post('/po_in', (required, response) => {
@@ -296,19 +294,13 @@ router.post('/po_in', (required, response) => {
 });
 
 // po_out
-router.get('/po_out',async (req, res) => {
+router.get('/po_out', (req, res) => {
     $query = "SELECT * FROM CB_po_out";
-    /*connection.query($query, (error, result) => {
+    connection.query($query, (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });*/
-
-    const conn = await connection.getConnection();
-
-    const [result, fields]= await conn.query($query);
-    conn.release();
-    res.send(result);
+    });
 });
 
 // ack_in
@@ -347,19 +339,13 @@ router.post('/ack_in', (required, response) => {
 });
 
 //ack_out
-router.get('/ack_out', async (req, res) => {
+router.get('/ack_out',  (req, res) => {
     $query = "SELECT * FROM CB_ack_out";
-    /*connection.query($query, (error, result) => {
+    connection.query($query, (error, result) => {
         if (error) console.log(error);
         //res.status(200).json(result.rows);
         res.send(result);
-    });*/
-
-    const conn = await connection.getConnection();
-
-    const [result, fields]= await conn.query($query);
-    conn.release();
-    res.send(result);
+    });
 });
 
 // test logs
