@@ -99,15 +99,25 @@ th, td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-    width: calc(100% / 14);
-    font-size: 14px;
 }
 
 th {
     background-color: #f2f2f2;
     font-weight: bold;
+    font-size: 14px;
 }
 
+td {
+    font-size: 13px;
+}
+
+.kleiner {
+    font-size: 8px;
+}
+
+.klein {
+    font-size: 10px;
+}
 /* Footer stijl */
 footer {
     background-color: #004a8f; 

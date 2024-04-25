@@ -1,4 +1,5 @@
-/*async function fetchDataForTransactionID() {
+/* try one AdamG
+async function fetchDataForTransactionID() {
     try {
         const apiUrl = '/api/Transaction ID';
         const response = await fetch(apiUrl);
@@ -168,39 +169,106 @@ async function fetchDataForBb_code() {
     }
 }
 */
-/*
+/* try two AdamG
 Een verkorte versie waarin in plaats van cel per cel in het tabel een gegeven te pullen uit het api het programma een nieuwe rij
 zal maken en die vullen met het gepullde informatie uit het api. Andere verschil is dat het volgorde van gepulde informatie uit het
 api cruciaal is, het volgorde van de th's in het tabel en het volgorde van het opgehaalde informatie uit het api moeten perfect
 overeenkomen anders zullen ze niet in het juiste volgorde zijn in het tabel.
 */
+async function fetchDataAndUpdate() {
+    const apiUrl = 'https://pingfin.onrender.com/api/logs'; // Example API endpoint
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    console.log(data)
+    addRowToTable(data);
+}
+
 
 function addRowToTable(data) {
     const tableBody = document.getElementById('transaction-table-body');
-    const newRow = document.createElement('tr');
 
     // Create and populate table cells with data from the API
-    Object.values(data).forEach(value => {
-        const newCell = document.createElement('td');
-        newCell.textContent = value;
+    data.forEach(value => {
+        const newRow = document.createElement('tr');
+        let newCell = document.createElement('td');
+        newCell.textContent = value.log_id;
         newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.log_datetime;
+        newCell.classList.add('kleiner');
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.log_message;
+        newCell.classList.add('klein');
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.log_type;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.po_id;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.po_amount;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.po_message;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.po_datetime;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.ob_id;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.oa_id;
+        newCell.classList.add('kleiner');
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.ob_code;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.ob_datetime;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.cb_code;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.cb_datetime;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.bb_id;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.ba_id;
+        newCell.classList.add('kleiner');
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.bb_code;
+        newRow.appendChild(newCell);
+
+        newCell = document.createElement('td');
+        newCell.textContent = value.bb_datetime;
+        newRow.appendChild(newCell);
+
+        tableBody.appendChild(newRow);
+
     });
-
-    tableBody.appendChild(newRow);
-}
-
-async function fetchDataAndUpdate() {
-    try {
-        const apiUrl = 'https://pingfin.onrender.com/api/logs'; // Example API endpoint
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error('API request failed');
-        }
-        const data = await response.json();
-        addRowToTable(data);
-    } catch (error) {
-        console.error('An error occurred:', error);
-    }
 }
 
 fetchDataAndUpdate(); // Fetch data from API and update table on page load
