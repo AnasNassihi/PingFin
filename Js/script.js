@@ -191,6 +191,14 @@ function addRowToTable(data) {
     data.forEach(value => {
         const newRow = document.createElement('tr');
         let newCell = document.createElement('td');
+
+        // Check voorwaarden voor kleur
+        if (value.bb_code === '2000' && value.cb_code === '2000' && value.ob_code === '2000') {
+            newRow.classList.add('groen'); // Voeg de klasse 'groen' toe aan de rij
+        } else {
+            newRow.classList.add('rood'); // Voeg de klasse 'rood' toe aan de rij
+        }
+
         newCell.textContent = value.log_id;
         newRow.appendChild(newCell);
 

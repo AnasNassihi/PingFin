@@ -118,6 +118,17 @@ td {
 .klein {
     font-size: 10px;
 }
+
+.groen {
+    background-color: rgb(74, 224, 74);
+    color: white;
+}
+
+.rood {
+    background-color: rgb(248, 74, 74);
+    color: white;
+}
+
 /* Footer stijl */
 footer {
     background-color: #004a8f; 
