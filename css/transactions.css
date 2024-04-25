@@ -1,19 +1,17 @@
-/* Resetten van standaardmarges en -paddings */
 body, h1, h2, p, ul, li {
     margin: 0;
     padding: 0;
 }
 
-/* Basisstijl voor de hele pagina */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9; /* Lichtgrijze achtergrond */
+    background-color: #f9f9f9; 
     color: #333;
 }
 
 /* Header stijl */
 header {
-    background-color: #004a8f; /* Donkerblauwe header */
+    background-color: #004a8f;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -48,7 +46,7 @@ main {
 
 .buttons {
     list-style-type: none;
-    text-align: center; /* Center align de inhoud */
+    text-align: center;
 }
 
 .buttons li {
@@ -59,7 +57,7 @@ main {
 .buttons li a {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #004a8f; /* Donkerblauwe knopkleur */
+    background-color: #004a8f;
     color: #fff;
     border-radius: 5px;
     text-decoration: none;
@@ -68,19 +66,19 @@ main {
 }
 
 .buttons li a:hover {
-    background-color: #00264d; /* Donkerder blauw bij hover */
+    background-color: #00264d;
 }
 
 .buttons li:last-child {
-    margin-right: 0; /* Verwijder margin rechts van de laatste knop */
+    margin-right: 0;
 }
 
-/* Stel de wrapper in om de volledige breedte in te nemen */
 .main-content {
     width: 100%;
-    text-align: center; /* Center align de inhoud */
+    text-align: center;
 }
-/* Stijl voor transactie-informatie */
+
+/* Transactie stijl */
 .transaction-info {
     background-color: #fff;
     border-radius: 10px;

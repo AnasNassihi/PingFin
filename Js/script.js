@@ -176,7 +176,7 @@ api cruciaal is, het volgorde van de th's in het tabel en het volgorde van het o
 overeenkomen anders zullen ze niet in het juiste volgorde zijn in het tabel.
 */
 async function fetchDataAndUpdate() {
-    const apiUrl = 'https://pingfin.onrender.com/api/logs'; // Example API endpoint
+    const apiUrl = 'https://pingfin.onrender.com/api/logs';
     const response = await fetch(apiUrl);
     const data = await response.json();
     console.log(data)
@@ -187,7 +187,6 @@ async function fetchDataAndUpdate() {
 function addRowToTable(data) {
     const tableBody = document.getElementById('transaction-table-body');
 
-    // Create and populate table cells with data from the API
     data.forEach(value => {
         const newRow = document.createElement('tr');
         let newCell = document.createElement('td');
@@ -279,5 +278,4 @@ function addRowToTable(data) {
     });
 }
 
-fetchDataAndUpdate(); // Fetch data from API and update table on page load
-
+fetchDataAndUpdate();

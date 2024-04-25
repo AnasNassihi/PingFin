@@ -1,19 +1,17 @@
-/* Resetten van standaardmarges en -paddings */
 body, h1, h2, p, ul, li {
     margin: 0;
     padding: 0;
 }
 
-/* Basisstijl voor de hele pagina */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9; /* Lichtgrijze achtergrond */
+    background-color: #f9f9f9;
     color: #333;
 }
 
 /* Header stijl */
 header {
-    background-color: #004a8f; /* Donkerblauwe header */
+    background-color: #004a8f;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -38,7 +36,7 @@ main {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centreren van de inhoud */
+    align-items: center;
 }
 
 /* Navigatieknoppen */
@@ -54,7 +52,7 @@ main {
 .buttons li a {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #004a8f; /* Donkerblauwe knopkleur */
+    background-color: #004a8f;
     color: #fff;
     border-radius: 5px;
     text-decoration: none;
@@ -62,14 +60,14 @@ main {
 }
 
 .buttons li a:hover {
-    background-color: #00264d; /* Donkerder blauw bij hover */
+    background-color: #00264d;
 }
 
-/* Stijl voor de sectie "Team-info" */
+/* "Team-info" stijl */
 #team-info {
     max-width: 600px;
     margin-bottom: 20px;
-    text-align: center; /* Centreren van de tekst */
+    text-align: center;
     padding-top: 60px;
 }
 
@@ -84,7 +82,7 @@ main {
 
 #team-info h2 {
     margin-bottom: 10px;
-    color: #004a8f; /* Donkerblauwe tekstkleur */
+    color: #004a8f; 
 }
 
 #team-info p {
@@ -93,7 +91,7 @@ main {
 
 /* Footer stijl */
 footer {
-    background-color: #004a8f; /* Donkerblauwe footer */
+    background-color: #004a8f;
     color: #fff;
     padding: 10px 0;
     text-align: center;
@@ -109,30 +107,31 @@ footer p {
 
 /* Link stijl */
 a {
-    color: #004a8f; /* Donkerblauwe linkkleur */
+    color: #004a8f;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
 }
-/* CSS for the foto class */
+
+/* Foto stijl */
 .foto {
     display: flex;
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
-    justify-content: space-between; /* Distribute items evenly */
+    flex-wrap: wrap; 
+    justify-content: space-between;
 	padding-top: 25px;
 }
 
 .foto-groep {
-    width: calc(25% - 10px); /* Adjusted width for each item with margin */
-    margin-bottom: 20px; /* Spacing between rows */
+    width: calc(25% - 10px);
+    margin-bottom: 20px; 
 	text-align: center;
 	list-style: none;
 	animation: fadeIn 0.5s ease forwards;
 }
 
 .foto-groep img {
-    width: 100%; /* Make images fill their parent container */
+    width: 91%;
 	border-radius: 20px;
 }
